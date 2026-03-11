@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APC CROSS RIVER MEMBERSHIP FORM</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+.container{
+  max-width: 700px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+h1,h2{
+  text-align:center;
+  color:#006400;
+}
+label{
+  display:block;
+  margin:15px 0 5px;
+  font-weight:bold;
+}
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+textarea{
+  resize: vertical;
+}
+button{
+  background:#006400;
+  color:white;
+  padding:12px;
+  margin-top:20px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  width:100%;
+  font-size:16px;
+}
+button:hover{
+  background:#008000;
+}
+.free-registration{
+  text-align:center;
+  font-weight:bold;
+  background:#006400;
+  color:white;
+  padding:10px;
+  border-radius:5px;
+  margin-bottom:20px;
+}
+/* Logo styling */
+.logo{
+  text-align:center;
+  margin-bottom:15px;
+}
+.logo img{
+  width:150px;
+  height:auto;
+}
+/* Success message */
+.success{
+  display:none;
+  text-align:center;
+  padding:40px;
+}
+.success h2{
+  color:#006400;
+}
+.success p{
+  font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="formContainer">
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="apc_logo.png" alt="APC Logo">
+  </div>
+
+  <!-- Headings -->
+  <h1>ALL PROGRESSIVE CONGRESS (APC)<br>CROSS RIVER STATE</h1>
+  <h2>ONLINE MEMBERSHIP<br>REGISTRATION FORM</h2>
+
+  <div class="free-registration">REGISTRATION IS FREE</div>
+
+  <form id="apcForm">
+
+    <label>NIN NUMBER</label>
+    <input type="text" name="nin" required>
+
+    <label>TITLE</label>
+    <select name="title">
+      <option>MR</option>
+      <option>MRS</option>
+      <option>MISS</option>
+      <option>DR</option>
+      <option>CHIEF</option>
+      <option>OTHER</option>
+    </select>
+
+    <label>FIRST NAME</label>
+    <input type="text" name="firstName" required>
+
+    <label>MIDDLE NAME</label>
+    <input type="text" name="middleName">
+
+    <label>LAST NAME</label>
+    <input type="text" name="lastName" required>
+
+    <label>PHONE NUMBER</label>
+    <input type="tel" name="phone" required>
+
+    <label>GENDER</label>
+    <select name="gender">
+      <option>MALE</option>
+      <option>FEMALE</option>
+    </select>
+
+    <label>MARITAL STATUS</label>
+    <select name="marital">
+      <option>SINGLE</option>
+      <option>MARRIED</option>
+      <option>DIVORCED</option>
+      <option>WIDOWED</option>
+    </select>
+
+    <label>ADDRESS</label>
+    <textarea name="address" rows="3"></textarea>
+
+    <label>OCCUPATION</label>
+    <input type="text" name="occupation">
+
+    <label>RELIGION</label>
+    <input type="text" name="religion">
+
+    <label>STATE</label>
+    <input type="text" name="state" value="CROSS RIVER" readonly>
+
+    <label>LOCAL GOVERNMENT AREA (LGA)</label>
+    <select name="lga">
+      <option>CALABAR MUNICIPAL</option>
+    </select>
+
+    <label>WARD</label>
+    <select name="ward">
+      <option>01</option>
+      <option>02</option>
+      <option>03</option>
+      <option>04</option>
+      <option>05</option>
+      <option>06</option>
+      <option>07</option>
+      <option>08</option>
+      <option>09</option>
+      <option>10</option>
+    </select>
+
+    <label>POLLING UNIT</label>
+    <input type="text" name="pollingUnit">
+
+    <label>INEC VOTERS REGISTRATION ID (VIN)</label>
+    <input type="text" name="vin">
+
+    <label>
+      <input type="checkbox" name="consent" required>
+      I CONSENT TO THE USE OF MY DATA FOR THE PURPOSE OF THIS APPLICATION
+    </label>
+
+    <button type="submit">REGISTER</button>
+  </form>
+</div>
+
+<div class="container success" id="successBox">
+  <h2>REGISTRATION SUBMITTED SUCCESSFULLY</h2>
+  <p>THANK YOU FOR REGISTERING WITH<br>ALL PROGRESSIVE CONGRESS (APC)</p>
+</div>
+
+<script>
+const form = document.getElementById('apcForm');
+const scriptURL = 'YOUR_WEB_APP_URL_HERE'; // Replace with your Google Apps Script URL
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  formData.set('consent', formData.get('consent') ? 'YES' : 'NO');
+
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(res => {
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("successBox").style.display = "block";
+    })
+    .catch(err => alert("ERROR SUBMITTING FORM"));
+});
+</script>
+
+</body>
+</html>
